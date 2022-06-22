@@ -4,6 +4,7 @@ var leftwristy=0;
 var rightwristx=0;
 var rightwristy=0;
 var scoreleftwrist;
+var scorerightwrist;
 
 function preload(){
     song=loadSound("music.mp3");
@@ -23,8 +24,6 @@ function draw(){
     fill("#FF0000")
     stroke("#FF0000");
     if (scoreleftwrist>0.2){
-        
-    
     circle(leftwristx,leftwristy,20);
     isNumberleftwristy=Number(leftwristy)
     removedecimals=floor(isNumberleftwristy)
@@ -32,7 +31,35 @@ function draw(){
     song.setVolume(volume)
     document.getElementById("volume").innerHTML="Volume= "+volume
     }
+if (scorerightwrist>0.2){
+    circle(rightwristx,rightwristy,20);
+    if (rightwristy>0 && rightwristy<=100){
+        song.rate(0.5);
+        document.getElementById("speed").innerHTML="Speed = 0.5x"
+    }
+
+    if (rightwristy>100 && rightwristy<=200){
+        song.rate(1);
+        document.getElementById("speed").innerHTML="Speed = 1x"
+    }
+
+    if (rightwristy>200 && rightwristy<=300){
+        song.rate(1.5);
+        document.getElementById("speed").innerHTML="Speed = 1.5x"
+    }
+
+    if (rightwristy>300 && rightwristy<=400){
+        song.rate(2);
+        document.getElementById("speed").innerHTML="Speed = 2x"
+    }
+
+    if (rightwristy>400 && rightwristy<=500){
+        song.rate(2.5);
+        document.getElementById("speed").innerHTML="Speed = 2.5x"
+    }
 }
+}
+
 
 function play() {
     song.play();
@@ -51,7 +78,7 @@ function gotposes(results){
         rightwristx=results[0].pose.rightWrist.x;
         rightwristy=results[0].pose.rightWrist.y;
         scoreleftwrist=results[0].pose.keypoints[9].score;
-        
+        scorerightwrist=results[0].pose.keypoints[10].score;
     }
 }
 
